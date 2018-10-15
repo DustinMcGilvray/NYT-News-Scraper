@@ -1,0 +1,27 @@
+{
+  "name": "nyt-news-scraper",
+  "version": "1.0.0",
+  "description": "Scraper for New York Times Headlines",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DustinMcGilvray/NYT-News-Scraper.git"
+  },
+  "author": "Dustin McGilvray",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DustinMcGilvray/NYT-News-Scraper/issues"
+  },
+  "homepage": "https://github.com/DustinMcGilvray/NYT-News-Scraper#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^5.3.3",
+    "morgan": "^1.9.1"
+  }
+}
