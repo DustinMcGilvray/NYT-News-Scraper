@@ -1,4 +1,4 @@
-// Express Server for running app pn local server
+// Express Server for running app on local server
 var express = require("express");
 //MongooseDB for holding information in Database
 var mongoose = require("mongoose");
@@ -20,6 +20,10 @@ var app = express();
 app.use(express.urlencoded({
     extended: true
 }));
+
+// Make public a static folder
+app.use(express.static("public"));
+
 
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/scrapeInfo", {
