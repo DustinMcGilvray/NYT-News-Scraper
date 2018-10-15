@@ -1,1 +1,1 @@
-# NYT-News-Scraper
+# Web-Scraper
