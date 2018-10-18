@@ -6,15 +6,15 @@ var mongoose = require("mongoose");
 var exphbs = require('express-handlebars');
 
 // HTTP request logger middleware for node.js
-// var logger = require('morgan')
-
-// Use morgan logger for logging requests
-// app.use(logger("dev"));
+var logger = require('morgan');
 
 var PORT = 3000;
 
 // Initialize the Express Server
 var app = express();
+
+// Use morgan logger for logging requests
+app.use(logger("dev"));
 
 // Parse request body as JSON
 app.use(express.urlencoded({
@@ -24,9 +24,8 @@ app.use(express.urlencoded({
 // Make public a static folder
 app.use(express.static("public"));
 
-
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scrapeInfo", {
+mongoose.connect("mongodb://localhost/brickNerdArticles", {
     useNewUrlParser: true
 });
 
@@ -40,7 +39,6 @@ app.set('view engine', '.hbs');
 
 // Routes
 require("./routes/scrapeRoutes")(app);
-
 
 // Start the server
 app.listen(PORT, function () {

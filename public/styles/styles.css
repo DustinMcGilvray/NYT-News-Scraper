@@ -1,30 +1,68 @@
-body { background-color: #F2F6D0 }
-#wrapper {
-  width: 960px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 5%;
+/*================= Backgrounds for Pages ===================*/
+
+#index-background {
+    background-image: url("/img/lego-minifigs-on-beam.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-#articles {
-  display: inline-block;
-  overflow: auto;
-  width: 60%;
-  height: 700px;
+
+#article-background {
+    background-image: url("/img/lego-patent-bw.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-#notes {
-  float: right;
-  width: 30%;
+
+#scrape-background {
+    background-image: url("/img/gray-lego-plate.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-textarea, input {
-  display: block;
-  width: 100%;
-  background-color: #FCF5C7;
+
+#saved-background {
+    background-image: url("/img/lego-minifig-blueprint-bw.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-input {
-  height: 36px;
-  font-size: 24px;
+
+#error-background {
+    background-image: url("/img/warning-lego-heads.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-textarea {
-  height: 200px;
-  font-size: 18px;
+
+/*=============== End Backgrounds for Pages ===================*/
+
+#header {
+    color: ghostwhite;
 }
+
+#button-links {
+    color: ghostwhite;
+}
+
+#logo-card {
+    background: rgba(18, 67, 230, 0.438);
+}
+
+/*====================Styles for articles.hbs========================*/
+
+/*Reveal Cards for Scrape Information*/
+#article-summary {
+    padding: 20px;
+}
+
+/*==================End Styles for articles.hbs=====================*/
+
+body > .grid {
+    height: 100%;
+  }
+
+  #lego-head {
+      width: 400px;
+      height: 400px;
+  }

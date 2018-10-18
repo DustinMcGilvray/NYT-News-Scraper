@@ -16,6 +16,19 @@ module.exports = function (app) {
         res.render("index");
     });
 
+    // app.get("/savedarticles", function (req, res) {
+    //     res.render("savedarticles");
+    // });
+
+    // app.get("/404", function (req, res) {
+    //     res.render("404");
+    // });
+
+    // app.get("/scrape", function (req, res) {
+    //     res.render("scrape");
+    // });
+
+
     // A GET route for scraping the brothersbrick website
     app.get("/scrape", function (req, res) {
         // First, we grab the body of the html with axios
@@ -35,6 +48,9 @@ module.exports = function (app) {
                 result.link = $(this)
                     .find("a")
                     .attr("href");
+                result.date = $(this)
+                    .find("time")
+                    .attr("datetime");
                 result.summary = $(this)
                     .find("p")
                     .text();
@@ -55,18 +71,20 @@ module.exports = function (app) {
             });
 
             // If we were able to successfully scrape and save an Article, send a message to the client
-            res.send("Scrape Complete");
-            // res.render("index", results);
+            res.send("Scrape Complete!");
+            // res.redirect("/articles");
+
         });
     });
-
 
     // Route for getting all Articles from the db
     app.get("/articles", function (req, res) {
         // TODO: Finish the route so it grabs all of the articles
         db.Article.find({})
             .then(function (dbArticle) {
-                res.json(dbArticle);
+                res.render("articles", {
+                    articles: dbArticle
+                });
             })
             .catch(function (err) {
                 res.json(err);
@@ -94,8 +112,7 @@ module.exports = function (app) {
 
     // Route for saving/updating an Article's associated Note
     app.post("/articles/:id", function (req, res) {
-        // TODO
-        // ====
+       
         // save the new note that gets posted to the Notes collection
         // then find an article from the req.params.id
         // and update it's "note" property with the _id of the new note
@@ -114,5 +131,35 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+
+    //================ Route for Saving Articles to Saved Articles Page ==================
+    app.get("/saved", function (req, res) {
+
+        db.Article.find(         
+            {
+                saved: true
+            })
+            .populate("saved")
+            .then(function (dbArticle) {
+                res.render("savedarticles", {
+                    articles: dbArticle
+                });
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
+    app.get("/saved/:id", function(req, res) {
+        db.Article.update({_id: req.params.id},{saved: true})
+        .then(function(result) {
+            res.redirect("/savedarticles")
+        })
+        .catch(function(err) {
+            res.json(err);
+        });
+    });
+
+
 
 };
