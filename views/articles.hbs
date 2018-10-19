@@ -3,63 +3,58 @@
 <body id="article-background">
 
 
-<div class="ui sizer vertical segment">
-    <div id="header" class="ui huge center aligned header">Brick Nerd Web Scraper</div>
-    <div class="four ui buttons">
-        <button class="ui blue button button">
-            <a id="button-links" href="/">Home</a>
-        </button>
-        <button class="ui yellow button">
-            <a id="button-links" href="/savedarticles">Saved Articles</a></button>
-           <button class="ui purple button">
-            <a id="button-links" href="/scrape">Scrape</a>
-        </button>
-        <button class="ui red button">
-            <a id="button-links" href="/cleararticles">Clear Articles</a>
-        </button>
+    <div class="ui sizer vertical segment">
+        <div id="header" class="ui huge center aligned header">Brick Nerd Web Scraper Articles</div>
+        <div class="four ui buttons">
+            <button class="ui blue button button">
+                <a id="button-links" href="/">Home</a>
+            </button>
+            <button class="ui yellow button">
+                <a id="button-links" href="/savedarticles">Saved Articles</a></button>
+            <button class="ui purple button">
+                <a id="button-links" href="/scrape">Scrape</a>
+            </button>
+            <button class="ui red button">
+                <a id="button-links" href="/cleararticles">Clear Articles</a>
+            </button>
+        </div>
     </div>
-</div>
 
-<div class="ui hidden divider"></div>
+    <div class="ui hidden divider"></div>
 
-<div class="ui grid container">
-    <div id="article-cards" class="column">
-        <div class="ui stackable three cards">
+    <div class="ui grid container">
 
-            {{#each articles}}
-            <div class="ui raised card">
-                <div class="ui move down reveal">
-                    <div class="visible content">
-                        <img src="{{this.image}}" class="ui fluid image">
-                    </div>
-                    <div id="article-summary" class="hidden center aligned content">
-                        <p> {{this.summary}} </p>
-                    </div>
+        {{#each articles}}
+        <div class="ui relaxed items">
+            <div id="article-item" class="item">
+                <div class="ui medium image">
+                    <img src="{{this.image}}">
                 </div>
-                <div class="content">
-                    <a href="http://bricknerd.com{{this.link}}" target="_blank" class="header"> {{this.title}} </a>
+                <div class="middle aligned content">
+                    <a id="link-title" class="header" href="http://bricknerd.com{{this.link}}" target="_blank">
+                        {{this.title}}
+                    </a>
                     <div class="meta">
-                        <span class="date">{{this.date}}</span>
+                        <span id="link-title" class="date">{{this.date}}</span>
                     </div>
-                </div>
-                <div class="extra content">
-                    <div id="save-article" class="fluid ui animated fade button" tabindex="0">
-                        <div class="hidden content">Save Article</div>
-                        <div class="visible content">
-                            <i class="save icon"></i>
+                    <div class="description">
+                        <p>{{this.summary}}</p>
+                    </div>
+                    <div class="extra">
+                        <div data-id={{this._id}} class="ui blue right floated button save-article">
+                            Save
                         </div>
                     </div>
                 </div>
             </div>
-            {{/each}}
-
         </div>
+        {{/each}}
+
     </div>
-</div>
 
 
-<div id="notes"></div>
+    <div id="notes"></div>
 
 
 
-{{> footer}}
+    {{> footer}}

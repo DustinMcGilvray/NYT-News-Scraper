@@ -71,8 +71,8 @@ module.exports = function (app) {
             });
 
             // If we were able to successfully scrape and save an Article, send a message to the client
-            res.send("Scrape Complete!");
-            // res.redirect("/articles");
+            // res.send("Scrape Complete!");
+            res.redirect("/articles");
 
         });
     });
@@ -133,24 +133,26 @@ module.exports = function (app) {
     });
 
     //================ Route for Saving Articles to Saved Articles Page ==================
-    app.get("/saved", function (req, res) {
+    app.get("/savedarticles", function (req, res) {
 
         db.Article.find(         
             {
                 saved: true
             })
-            .populate("saved")
-            .then(function (dbArticle) {
-                res.render("savedarticles", {
-                    articles: dbArticle
-                });
-            })
+            .then(function (dbArticle) {              
+                    var hbsObject = {
+                        articles: dbArticle
+                    };
+                    res.render("savedarticles", hbsObject);
+                })
+            
             .catch(function (err) {
                 res.json(err);
             });
     });
 
-    app.get("/saved/:id", function(req, res) {
+    app.get("/savedarticles/:id", function(req, res) {
+        console.log(req.params.id);
         db.Article.update({_id: req.params.id},{saved: true})
         .then(function(result) {
             res.redirect("/savedarticles")
@@ -159,6 +161,8 @@ module.exports = function (app) {
             res.json(err);
         });
     });
+
+
 
 
 

@@ -1,3 +1,12 @@
+/*=========Google Fonts =============*/
+
+/*===== Headers =======*/
+/* font-family: 'Bevan', cursive; */
+/*===== Content ======*/
+/* font-family: 'Montserrat',
+sans-serif; */
+
+
 /*================= Backgrounds for Pages ===================*/
 
 #index-background {
@@ -8,10 +17,11 @@
 }
 
 #article-background {
-    background-image: url("/img/lego-patent-bw.jpg");
+    background-image: url("/img/lego-patent-black.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 #scrape-background {
@@ -26,6 +36,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 #error-background {
@@ -39,6 +50,9 @@
 
 #header {
     color: ghostwhite;
+    font-family: 'Bevan', cursive;
+    background: rgba(86, 204, 8, 0.616);
+    padding: 25px;
 }
 
 #button-links {
@@ -46,23 +60,49 @@
 }
 
 #logo-card {
-    background: rgba(18, 67, 230, 0.438);
+    /* background: rgba(204, 201, 8, 0.616); */
+    background: rgba(86, 204, 8, 0.616);
 }
 
 /*====================Styles for articles.hbs========================*/
 
 /*Reveal Cards for Scrape Information*/
+
+#link-title {
+    color: ghostwhite;
+    font-family: 'Alfa Slab One', cursive;
+}
+
+#card-date {
+    text-align: center;
+}
+
 #article-summary {
     padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+    overflow-y: scroll;
+}
+
+p {
+    color: ghostwhite;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#article-item{
+    background: rgba(0, 0, 0, 0.616);
+}
+
+.ui.items>.item .extra>[class*="right floated"] {
+    margin-right: .75rem;
 }
 
 /*==================End Styles for articles.hbs=====================*/
 
-body > .grid {
+body>.grid {
     height: 100%;
-  }
+}
 
-  #lego-head {
-      width: 400px;
-      height: 400px;
-  }
+#lego-head {
+    width: 400px;
+    height: 400px;
+}

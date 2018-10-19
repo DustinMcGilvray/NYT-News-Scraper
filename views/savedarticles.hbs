@@ -5,10 +5,10 @@
     <div class="ui sizer vertical segment">
         <div id="header" class="ui huge center aligned header">Brick Nerd Saved Articles</div>
         <div class="two ui buttons">
-            <button class="ui button">
-                <a href="/">Home</a>
+            <button class="ui red button">
+                <a id="button-links" href="/">Home</a>
             </button>
-            <button class="ui button">Clear Articles</button>
+            <button id="button-links" class="ui yellow button">Clear Articles</button>
         </div>
     </div>
 
@@ -18,32 +18,32 @@
         <div id="article-cards" class="column">
 
             {{#each savedArticles}}
-            <div class="ui raised card">
-                <div class="ui move down reveal">
-                    <div class="visible content">
-                        <img src="{{this.image}}" class="ui fluid image">
+            <div class="ui divided items">
+                <div class="item">
+                    <div class="image">
+                        <img src="{{this.image}}">
                     </div>
-                    <div id="article-summary" class="hidden center aligned content">
-                        <p> {{this.summary}} </p>
-                    </div>
-                </div>
-                <div class="content">
-                    <a href="http://bricknerd.com{{this.link}}" target="_blank" class="header"> {{this.title}} </a>
-                    <div class="meta">
-                        <span class="date">{{this.date}}</span>
-                    </div>
-                </div>
-                <div class="extra content">
-                    <div id="delete-article" class="fluid ui animated fade button" tabindex="0">
-                        <div class="hidden content">Delete Article</div>
-                        <div class="visible content">
-                            <i class="trash alternate outline icon"></i>
+                    <div class="content">
+                        <a href="http://bricknerd.com{{this.link}}" target="_blank" class="header"> {{this.title}} </a>
+                        <div class="meta">
+                            <span class="date">{{this.date}}</span>
                         </div>
-                    </div>
-                    <div id="make-note" class="fluid ui animated fade button" tabindex="0">
-                        <div class="hidden content">Make a Note</div>
-                        <div class="visible content">
-                            <i class="pencil alternate icon"></i>
+                        <div class="description">
+                            <p>{{this.image}}</p>
+                        </div>
+                        <div class="extra">
+                            <div id="delete-article" class="fluid ui animated fade button" tabindex="0">
+                                <div class="hidden content">Delete Article</div>
+                                <div class="visible content">
+                                    <i class="trash alternate outline icon"></i>
+                                </div>
+                            </div>
+                            <div id="make-note" class="fluid ui animated fade button" tabindex="0">
+                                <div class="hidden content">Make a Note</div>
+                                <div class="visible content">
+                                    <i class="pencil alternate icon"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,27 +52,8 @@
 
         </div>
 
-        <div class="ui basic modal">
-            <div class="ui  header">              
-               {{this.title}}
-            </div>
-            <div class="content">
-                <div class="field">
-      <label></label>
-      <input type="text" placeholder="Username">
+
     </div>
-                <div class="ui form">
-                    <div class="field">
-                        <label>Make a Note about this Article!</label>
-                        <textarea></textarea>
-                    </div>
-                </div>
-                <div class="actions">
-                   <div class="ui submit button">Submit</div>
-                </div>
-            </div>
-
-        </div>
 
 
-        {{> footer}}
+    {{> footer}}
