@@ -19,19 +19,27 @@
 
             {{#each savedArticles}}
             <div class="ui divided items">
-                <div class="item">
-                    <div class="image">
+                <div id="article-item" class="item">
+                    <div class="ui medium image">
                         <img src="{{this.image}}">
                     </div>
-                    <div class="content">
-                        <a href="http://bricknerd.com{{this.link}}" target="_blank" class="header"> {{this.title}} </a>
+                    <div class="middle aligned content">
+                        <a id="link-title" class="header" href="http://bricknerd.com{{this.link}}" target="_blank">
+                            {{this.title}}
+                        </a>
                         <div class="meta">
-                            <span class="date">{{this.date}}</span>
+                            <span id="link-title" class="date">{{this.date}}</span>
                         </div>
                         <div class="description">
-                            <p>{{this.image}}</p>
+                            <p>{{this.summary}}</p>
                         </div>
                         <div class="extra">
+                             <div data-id="{{this._id}}" class="fluid ui animated fade button review-note" tabindex="0">
+                                <div class="hidden content">Review Notes</div>
+                                <div class="visible content">
+                                    <i class="file alternate outline icon"></i>
+                                </div>
+                            </div>
                             <div id="delete-article" class="fluid ui animated fade button" tabindex="0">
                                 <div class="hidden content">Delete Article</div>
                                 <div class="visible content">
@@ -41,7 +49,7 @@
                             <div data-id={{this._id}} class="fluid ui animated fade button make-note" tabindex="0">
                                 <div class="hidden content">Make a Note</div>
                                 <div class="visible content">
-                                    <i class="pencil alternate icon"></i>
+                                    <i class="sticky note icon"></i>
                                 </div>
                             </div>
                         </div>
@@ -55,17 +63,17 @@
 
     </div>
 
-    <!-- Modal -->
+    <!--Make Note Modal -->
     {{#each savedArticles}}
-    <div class="ui basic modal">
+    <div class="ui basic modal note-modal">
         <div class="ui icon header">
-            <i class="archive icon"></i>
-            Archive Old Messages
+            <i class="sticky note icon"></i>
+            Make a Note
         </div>
         <div class="content">
             <div class="form2">
                 <form class="ui form">
-                     <div class="field">
+                    <div class="field">
                         <label>Name</label>
                         <input id="name_{{this._id }}" type="text" name="Name" placeholder="Name">
                     </div>
@@ -74,11 +82,30 @@
                         <textarea id="text_{{this._id }}" rows="5"></textarea>
                     </div>
                     <button data-id={{this._id }} class="submitComment ui button" type="submit">Submit Comment</button>
-
                 </form>
             </div>
         </div>
     </div>
     {{/each}}
+
+    <!-- Review Note Modal -->
+    <div class="ui basic modal review-modal">
+        <div class="ui icon header">
+            <i class="file alternate outline icon"></i>
+            NOTES
+        </div>
+        <div class="content">
+           <div class="notes">
+
+           </div>
+        </div>
+        <div class="actions">
+            <div class="ui red basic cancel inverted button">
+                <i class="trash alternate outline icon"></i>
+                
+            </div>
+        </div>
+    </div>
+
 
     {{> footer}}

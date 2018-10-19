@@ -29,6 +29,7 @@ module.exports = function (app) {
     // });
 
 
+
     // A GET route for scraping the brothersbrick website
     app.get("/scrape", function (req, res) {
         // First, we grab the body of the html with axios
@@ -92,7 +93,7 @@ module.exports = function (app) {
     });
 
     // Route for grabbing a specific Article by id, populate it with it's note
-    app.get("/articles/:id", function (req, res) {
+    app.get("/savedarticles/:id", function (req, res) {
         // TODO
         // ====
         // Finish the route so it finds one article using the req.params.id,
@@ -143,7 +144,7 @@ module.exports = function (app) {
                     
                     res.render("savedarticles", {
                         savedArticles: dbArticle
-                    });
+                    })
                 })
             
             .catch(function (err) {
