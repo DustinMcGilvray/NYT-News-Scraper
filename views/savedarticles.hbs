@@ -38,7 +38,7 @@
                                     <i class="trash alternate outline icon"></i>
                                 </div>
                             </div>
-                            <div id="make-note" class="fluid ui animated fade button" tabindex="0">
+                            <div data-id={{this._id}} class="fluid ui animated fade button make-note" tabindex="0">
                                 <div class="hidden content">Make a Note</div>
                                 <div class="visible content">
                                     <i class="pencil alternate icon"></i>
@@ -55,5 +55,30 @@
 
     </div>
 
+    <!-- Modal -->
+    {{#each savedArticles}}
+    <div class="ui basic modal">
+        <div class="ui icon header">
+            <i class="archive icon"></i>
+            Archive Old Messages
+        </div>
+        <div class="content">
+            <div class="form2">
+                <form class="ui form">
+                     <div class="field">
+                        <label>Name</label>
+                        <input id="name_{{this._id }}" type="text" name="Name" placeholder="Name">
+                    </div>
+                    <div class="field">
+                        <label>Short Text</label>
+                        <textarea id="text_{{this._id }}" rows="5"></textarea>
+                    </div>
+                    <button data-id={{this._id }} class="submitComment ui button" type="submit">Submit Comment</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    {{/each}}
 
     {{> footer}}

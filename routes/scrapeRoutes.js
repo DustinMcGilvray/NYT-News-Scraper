@@ -111,7 +111,7 @@ module.exports = function (app) {
     });
 
     // Route for saving/updating an Article's associated Note
-    app.post("/articles/:id", function (req, res) {
+    app.post("/savedarticles/:id", function (req, res) {
        
         // save the new note that gets posted to the Notes collection
         // then find an article from the req.params.id
@@ -140,10 +140,10 @@ module.exports = function (app) {
                 saved: true
             })
             .then(function (dbArticle) {              
-                    var hbsObject = {
-                        articles: dbArticle
-                    };
-                    res.render("savedarticles", hbsObject);
+                    
+                    res.render("savedarticles", {
+                        savedArticles: dbArticle
+                    });
                 })
             
             .catch(function (err) {
