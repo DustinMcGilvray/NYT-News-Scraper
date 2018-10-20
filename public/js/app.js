@@ -1,12 +1,5 @@
 $(document).ready(function () {
 
-  //========================= Semantic UI ===========================//
-
-
-
-  //======================== End Semantic UI =======================//
-
-
   // ======================= On Click Events =======================//
 
   //======== Save Article Button ========//
@@ -27,7 +20,19 @@ $(document).ready(function () {
     })
   });
 
-  // ======== Make Note Button =========//
+    // ============= Delete Saved Article Button ========= //
+    $(".delete-article").on("click", function (event) {
+      console.log("delete article button is working");
+      var deleteArticle = $(this).attr("data-id");
+      $.ajax({
+        method: "POST",
+        url: "/deletearticle/" + deleteArticle
+      }).done(function (data) {
+        window.location = "/savedarticles"
+      })
+    });
+
+  // ============= Make Note Button ==================================//
   $(".make-note").on("click", function (event) {
     var makeNote = $(this).attr("data-id");
     $("#" + makeNote).modal("show");
@@ -41,7 +46,7 @@ $(document).ready(function () {
     })
   });
 
-  // ============ Submit Note Button ========== //
+  // ============ Submit Note Button ============================ //
   $(".submit-note").on("click", function (event) {
     // event.preventDefault();
     console.log("submit comment button is working");
@@ -57,7 +62,7 @@ $(document).ready(function () {
     }).then(function (data) {})
   });
 
-  // ============ Review Note Button ========== //
+  // ============ Review Note Button ======================== //
   $(".review-note").on("click", function (event) {
     var reviewNote = $(this).attr("data-id");
 $(".review-modal").modal("show");
@@ -71,19 +76,20 @@ $(".review-modal").modal("show");
     })
   });
 
-  // ============= Delete Saved Article Button ========= //
-  $(".delete-article").on("click", function (event) {
-    console.log("delete article button is working");
-    var deleteArticle = $(this).attr("data-id");
-    $.ajax({
-      method: "POST",
-      url: "/deletearticle/" + deleteArticle
-    }).done(function (data) {
-      window.location = "/savedarticles"
-    })
-  });
+// =============== Delete Note Button ==================== //
+$(".delete-note").on("click", function (event) {
+  event.preventDefault();
+  console.log("delete note button is working");
+  var deleteNote = $(this).attr("data-id");
+  $.ajax({
+    method: "POST",
+    url: "/deletenote/" + deleteNote
+  }).done(function (data) {
+    window.location = "/savedarticles"
+  })
+});
 
-  // ============= End On Click Events ================= //
+// ============= End On Click Events ================= //
 
-  //========= End Document Ready Function =============//
+//========= End Document Ready Function =============//
 });

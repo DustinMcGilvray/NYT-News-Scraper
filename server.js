@@ -24,10 +24,14 @@ app.use(express.urlencoded({
 // Make public a static folder
 app.use(express.static("public"));
 
+// Connect to Mongo DB in Heroku
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/brickNerdArticles";
+mongoose.connect(MONGODB_URI);
+
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/brickNerdArticles", {
-    useNewUrlParser: true
-});
+// mongoose.connect("mongodb://localhost/brickNerdArticles", {
+//     useNewUrlParser: true
+// });
 
 // Set up Handlebars/View Engine
 app.set('views', './views');

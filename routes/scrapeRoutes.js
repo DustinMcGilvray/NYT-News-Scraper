@@ -12,9 +12,15 @@ var db = require("../models");
 
 module.exports = function (app) {
 
+// ================================ Landing Page Route ========================================================//
+
     app.get("/", function (req, res) {
         res.render("index");
     });
+
+// ==========================================================================================================//
+
+// ========================= Routes for Page Views During Build and Style =====================================//
 
     // app.get("/savedarticles", function (req, res) {
     //     res.render("savedarticles");
@@ -28,6 +34,7 @@ module.exports = function (app) {
     //     res.render("scrape");
     // });
 
+// =========================================================================================================//
 
 
     //=============== A GET route for scraping the BrickNerd website ======================//
@@ -37,12 +44,12 @@ module.exports = function (app) {
             // Then, we load that into cheerio and save it to $ for a shorthand selector
             var $ = cheerio.load(response.data);
 
-            // Now, we grab every h2 within an article tag, and do the following:
+            // Now, we grab the article tags, and do the following:
             $("div.post").each(function (i, element) {
                 // Save an empty result object
                 var result = {};
 
-                // Add the text and href of every link, and save them as properties of the result object
+                // Add the text and the information, and save them as properties of the result object
                 result.title = $(this)
                     .find("h1")
                     .text();
@@ -70,8 +77,6 @@ module.exports = function (app) {
                         return res.json(err);
                     });
             });
-
-            // If we were able to successfully scrape and save an Article, send a message to the client
             // res.send("Scrape Complete!");
             res.redirect("/articles");
 
@@ -80,7 +85,6 @@ module.exports = function (app) {
 
     //============== Route for getting all Articles from the db =========================================//
     app.get("/articles", function (req, res) {
-        // TODO: Finish the route so it grabs all of the articles
         db.Article.find({})
             .then(function (dbArticle) {
                 res.render("articles", {
@@ -94,16 +98,11 @@ module.exports = function (app) {
 
     //================ Route for grabbing a specific Article by id, populate it with it's note ============//
     app.get("/articles/:id", function (req, res) {
-        // TODO
-        // ====
-        // Finish the route so it finds one article using the req.params.id,
         db.Article.findOne({
                 _id: req.params.id
             })
-            // and run the populate method with "note",
             .populate("note")
             .then(function (dbArticle) {
-                // then responds with the article with the note included
                 res.json(dbArticle);
             })
             .catch(function (err) {
@@ -114,9 +113,6 @@ module.exports = function (app) {
     //================= Route for saving/updating an Article's associated Note =====================//
     app.post("/articles/:id", function (req, res) {
         console.log(req.params.id);
-        // save the new note that gets posted to the Notes collection
-        // then find an article from the req.params.id
-        // and update it's "note" property with the _id of the new note
         db.Note.create(req.body).then(function (dbNote) {
                 return db.Article.findOneAndUpdate({
                     _id: req.params.id
@@ -177,7 +173,7 @@ module.exports = function (app) {
                 "saved": false,
                 "notes": []
             })
-            // Execute the above query
+          
             .then(function (result) {
                 res.json({
                     success: true
@@ -187,6 +183,27 @@ module.exports = function (app) {
                 res.json(err);
             });
     });
+
+    //================= Route for Deleting Notes from Review Notes Modal ====================//
+    app.post("/deletenote/:id", function (req, res) {
+        // Use the article id to find and update its saved boolean
+        db.Article.findOneAndUpdate({
+                "_id": req.params.id
+            }, {
+                "saved": false,
+                "notes": []
+            })
+          
+            .then(function (result) {
+                res.json({
+                    success: true
+                })
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
+    });
+
 
 
 
