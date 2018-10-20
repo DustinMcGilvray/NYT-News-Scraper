@@ -178,14 +178,13 @@ module.exports = function (app) {
                 "notes": []
             })
             // Execute the above query
-            .exec(function (err, doc) {
-                // Log any errors
-                if (err) {
-                    console.log(err);
-                } else {
-                    // Or send the document to the browser
-                    res.send(doc);
-                }
+            .then(function (result) {
+                res.json({
+                    success: true
+                })
+            })
+            .catch(function (err) {
+                res.json(err);
             });
     });
 

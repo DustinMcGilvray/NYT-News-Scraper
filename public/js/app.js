@@ -54,21 +54,18 @@ $(document).ready(function () {
         author: $("#name_" + submitNote).val(),
         body: $("#text_" + submitNote).val()
       }
-    }).then(function (data) {
-      console.log(data);
-    })
+    }).then(function (data) {})
   });
 
   // ============ Review Note Button ========== //
   $(".review-note").on("click", function (event) {
-    event.preventDefault();
-    $(".review-modal").modal("show");
-    console.log("review note button is working");
     var reviewNote = $(this).attr("data-id");
+$(".review-modal").modal("show");
+    console.log("review note button is working");
     console.log(reviewNote);
     $.ajax({
       method: "GET",
-      url: "/note/:id" + reviewNote
+      url: "/articles/" + reviewNote
     }).then(function (data) {
 
     })
@@ -80,7 +77,7 @@ $(document).ready(function () {
     var deleteArticle = $(this).attr("data-id");
     $.ajax({
       method: "POST",
-      url: "/delete/" + deleteArticle
+      url: "/deletearticle/" + deleteArticle
     }).done(function (data) {
       window.location = "/savedarticles"
     })
