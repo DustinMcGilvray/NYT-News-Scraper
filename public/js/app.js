@@ -15,11 +15,19 @@ $(".save-article").on("click", function(event) {
   var savedArticle = $(this).attr("data-id");
 console.log(savedArticle);
   $.ajax({
-    method: "GET",
+    method: "POST",
     url: "/savedarticles/" + savedArticle
   }).then(function (data) {
     // location.reload()
-  })
+    if (data.success) {
+      console.log("SUCCESS!")
+    }
+    else {
+      console.log("SAD DAY!")
+    }
+  }
+  )
+
 });
 
 // ======== Make Note Button =========//
@@ -30,7 +38,7 @@ $(".make-note").on("click", function(event){
   console.log(makeNote);
   $.ajax({
     method: "GET",
-    url: "/savedarticles/" + makeNote
+    url: "/note/" + makeNote
   }).then(function (data) {
 
   })
@@ -44,7 +52,7 @@ $(".submitComment").on("click", function(event){
   console.log(submitComment);
   $.ajax({
     method: "POST",
-    url: "/savedarticles/" + submitComment,
+    url: "/note/" + submitComment,
     data: {
       author: $("#name_" + submitComment).val(),
       body: $("#text_" + submitComment).val()
@@ -86,7 +94,7 @@ $(".review-note").on("click", function(event) {
   });
 });
 
-// ============= End On Click Events =================//
+// ============= End On Click Events ================= //
 
 //========= End Document Ready Function =============//
 });

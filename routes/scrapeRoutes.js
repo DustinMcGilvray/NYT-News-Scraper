@@ -30,7 +30,7 @@ module.exports = function (app) {
 
 
 
-    // A GET route for scraping the brothersbrick website
+    //=============== A GET route for scraping the BrickNerd website ======================//
     app.get("/scrape", function (req, res) {
         // First, we grab the body of the html with axios
         axios.get("http://bricknerd.com/").then(function (response) {
@@ -78,7 +78,7 @@ module.exports = function (app) {
         });
     });
 
-    // Route for getting all Articles from the db
+    //============== Route for getting all Articles from the db =========================================//
     app.get("/articles", function (req, res) {
         // TODO: Finish the route so it grabs all of the articles
         db.Article.find({})
@@ -92,8 +92,8 @@ module.exports = function (app) {
             });
     });
 
-    // Route for grabbing a specific Article by id, populate it with it's note
-    app.get("/savedarticles/:id", function (req, res) {
+    //================ Route for grabbing a specific Article by id, populate it with it's note ============//
+    app.get("/note/:id", function (req, res) {
         // TODO
         // ====
         // Finish the route so it finds one article using the req.params.id,
@@ -111,9 +111,9 @@ module.exports = function (app) {
             });
     });
 
-    // Route for saving/updating an Article's associated Note
-    app.post("/savedarticles/:id", function (req, res) {
-       
+    //================= Route for saving/updating an Article's associated Note =====================//
+    app.post("/note/:id", function (req, res) {
+
         // save the new note that gets posted to the Notes collection
         // then find an article from the req.params.id
         // and update it's "note" property with the _id of the new note
@@ -126,6 +126,7 @@ module.exports = function (app) {
                     new: true
                 });
             }).then(function (dbArticle) {
+                console.log(dbArticle);
                 res.json(dbArticle)
             })
             .catch(function (err) {
@@ -133,36 +134,36 @@ module.exports = function (app) {
             });
     });
 
-    //================ Route for Saving Articles to Saved Articles Page ==================
+    //================ Route for Saving Articles to Saved Articles Page ==================//
     app.get("/savedarticles", function (req, res) {
-
-        db.Article.find(         
-            {
+        db.Article.find({
                 saved: true
             })
-            .then(function (dbArticle) {              
-                    
-                    res.render("savedarticles", {
-                        savedArticles: dbArticle
-                    })
+            .then(function (dbArticle) {
+                res.render("savedarticles", {
+                    savedArticles: dbArticle
                 })
-            
+            })
             .catch(function (err) {
                 res.json(err);
             });
     });
 
-    app.get("/savedarticles/:id", function(req, res) {
+    app.post("/savedarticles/:id", function (req, res) {
         console.log(req.params.id);
-        db.Article.update({_id: req.params.id},{saved: true})
-        .then(function(result) {
-            res.redirect("/savedarticles")
-        })
-        .catch(function(err) {
-            res.json(err);
-        });
+        db.Article.update({
+                _id: req.params.id
+            }, {
+                saved: true
+            })
+            .then(function (result) {
+                // res.redirect("/savedarticles")
+                res.json({success: true})
+            })
+            .catch(function (err) {
+                res.json(err);
+            });
     });
-
 
 
 

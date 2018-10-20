@@ -51,7 +51,7 @@ sans-serif; */
 #header {
     color: ghostwhite;
     font-family: 'Bevan', cursive;
-    background: rgba(86, 204, 8, 0.616);
+    background: rgba(86, 204, 8, 0.438);
     padding: 25px;
 }
 
@@ -89,7 +89,7 @@ p {
 }
 
 #article-item{
-    background: rgba(0, 0, 0, 0.616);
+    background: rgba(128, 5, 5, 0.616);
 }
 
 .ui.items>.item .extra>[class*="right floated"] {

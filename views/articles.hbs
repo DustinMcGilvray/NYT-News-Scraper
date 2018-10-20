@@ -2,22 +2,17 @@
 
 <body id="article-background">
 
+ <!--Navigation Bar-->
+    <div class="ui inverted menu">
+        <a class="red item" href="/">Home</a>
+        <a class="orange item" href="/savedarticles">Saved Articles</a>
+        <a class="yellow item" href="/scrape">Scrape</a>
+        <a class="olive item" href="/cleararticles">Clear Articles</a>
+    </div>
 
+    <!--Page Header-->
     <div class="ui sizer vertical segment">
         <div id="header" class="ui huge center aligned header">Brick Nerd Web Scraper Articles</div>
-        <div class="four ui buttons">
-            <button class="ui blue button button">
-                <a id="button-links" href="/">Home</a>
-            </button>
-            <button class="ui yellow button">
-                <a id="button-links" href="/savedarticles">Saved Articles</a></button>
-            <button class="ui purple button">
-                <a id="button-links" href="/scrape">Scrape</a>
-            </button>
-            <button class="ui red button">
-                <a id="button-links" href="/cleararticles">Clear Articles</a>
-            </button>
-        </div>
     </div>
 
     <div class="ui hidden divider"></div>
@@ -51,10 +46,5 @@
         {{/each}}
 
     </div>
-
-
-    <div id="notes"></div>
-
-
 
     {{> footer}}

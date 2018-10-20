@@ -2,14 +2,14 @@
 
 <body id="saved-background">
 
-    <div class="ui sizer vertical segment">
-        <div id="header" class="ui huge center aligned header">Brick Nerd Saved Articles</div>
-        <div class="two ui buttons">
-            <button class="ui red button">
-                <a id="button-links" href="/">Home</a>
-            </button>
-            <button id="button-links" class="ui yellow button">Clear Articles</button>
-        </div>
+     <!--Navigation Bar-->
+    <div class="ui inverted menu">
+        <a class="red item" href="/">Home</a>
+        <a class="orange item" href="/articles">Articles</a>
+    </div>
+
+     <div class="ui sizer vertical segment">
+        <div id="header" class="ui huge center aligned header">Brick Nerd Saved Articles</div>   
     </div>
 
     <div class="ui hidden divider"></div>
@@ -18,7 +18,7 @@
         <div id="article-cards" class="column">
 
             {{#each savedArticles}}
-            <div class="ui divided items">
+            <div class="ui relaxed items">
                 <div id="article-item" class="item">
                     <div class="ui medium image">
                         <img src="{{this.image}}">
@@ -34,22 +34,24 @@
                             <p>{{this.summary}}</p>
                         </div>
                         <div class="extra">
-                             <div data-id="{{this._id}}" class="fluid ui animated fade button review-note" tabindex="0">
-                                <div class="hidden content">Review Notes</div>
-                                <div class="visible content">
-                                    <i class="file alternate outline icon"></i>
+                            <div class="three ui buttons">
+                                <div data-id={{this._id}} class="ui blue animated fade button review-note" tabindex="0">
+                                    <div class="hidden content">Review Notes</div>
+                                    <div class="visible content">
+                                        <i class="file alternate outline icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="delete-article" class="fluid ui animated fade button" tabindex="0">
-                                <div class="hidden content">Delete Article</div>
-                                <div class="visible content">
-                                    <i class="trash alternate outline icon"></i>
+                                <div data-id={{this._id}} class="ui red animated fade button" tabindex="0">
+                                    <div class="hidden content">Delete Article</div>
+                                    <div class="visible content">
+                                        <i class="trash alternate outline icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div data-id={{this._id}} class="fluid ui animated fade button make-note" tabindex="0">
-                                <div class="hidden content">Make a Note</div>
-                                <div class="visible content">
-                                    <i class="sticky note icon"></i>
+                                <div data-id={{this._id}} class="ui green animated fade button make-note" tabindex="0">
+                                    <div class="hidden content">Make a Note</div>
+                                    <div class="visible content">
+                                        <i class="sticky note icon"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +103,7 @@
         </div>
         <div class="actions">
             <div class="ui red basic cancel inverted button">
-                <i class="trash alternate outline icon"></i>
+                <i class="remove icon"></i>
                 
             </div>
         </div>

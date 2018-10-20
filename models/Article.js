@@ -12,7 +12,6 @@ var ArticleSchema = new Schema({
     required: true,
     unique: true
   },
-  // `link` is required and of type String
   link: {
     type: String,
     required: true,
@@ -21,7 +20,6 @@ var ArticleSchema = new Schema({
   date: {
     type: String,
     required: true,
-    unique: true
   },
   summary: {
     type: String,
