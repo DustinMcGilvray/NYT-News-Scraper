@@ -8,7 +8,7 @@ var exphbs = require('express-handlebars');
 // HTTP request logger middleware for node.js
 var logger = require('morgan');
 
-var PORT = 3000;
+var PORT =  process.env.PORT || 3000;
 
 // Initialize the Express Server
 var app = express();
