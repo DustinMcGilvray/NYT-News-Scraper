@@ -1,100 +1,92 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
-//========================= Semantic UI ===========================//
-
-
-
-//======================== End Semantic UI =======================//
+  //========================= Semantic UI ===========================//
 
 
-// ======================= On Click Events =======================//
 
-//======== Save Article Button ========//
-$(".save-article").on("click", function(event) {
-  console.log("save article button is working");
-  var savedArticle = $(this).attr("data-id");
-console.log(savedArticle);
-  $.ajax({
-    method: "POST",
-    url: "/savedarticles/" + savedArticle
-  }).then(function (data) {
-    // location.reload()
-    if (data.success) {
-      console.log("SUCCESS!")
-    }
-    else {
-      console.log("SAD DAY!")
-    }
-  }
-  )
+  //======================== End Semantic UI =======================//
 
-});
 
-// ======== Make Note Button =========//
-$(".make-note").on("click", function(event){
-  $(".note-modal").modal("show");
-  console.log("make note button is working");
-  var makeNote = $(this).attr("data-id");
-  console.log(makeNote);
-  $.ajax({
-    method: "GET",
-    url: "/note/" + makeNote
-  }).then(function (data) {
+  // ======================= On Click Events =======================//
 
-  })
-});
-
-// ============ Submit Note Button ========== //
-$(".submitComment").on("click", function(event){
-  event.preventDefault();
-  console.log("submit comment button is working");
-  var submitComment = $(this).attr("data-id");
-  console.log(submitComment);
-  $.ajax({
-    method: "POST",
-    url: "/note/" + submitComment,
-    data: {
-      author: $("#name_" + submitComment).val(),
-      body: $("#text_" + submitComment).val()
-    }
-  }).then(function (data) {
-// console.log(data);
-  })
-});
-
-// ============ Review Note Button ========== //
-// $(".review-note").on("click", function(event){
-//   event.preventDefault();
-//   $(".review-modal").modal("show");
-//   console.log("review note button is working");
-//   var reviewNote = $(this).attr("data-id");
-//   console.log(reviewNote);
-//   $.ajax({
-//     method: "GET",
-//     url: "/savedarticles/" + reviewNote
-//   }).then(function (data) {
-
-//   })
-// });
-
-$(".review-note").on("click", function(event) {
-    
-  var reviewNote = $(this).attr("data-id");
-  $(".review-modal").modal("show");
-
-  $.ajax({
-    method: "GET",
-    url: "/savedarticles/" + reviewNote
-  }).then(function(result) {
-    console.log(result);
-    if (result.note) {
-      $(".notes").append("<p> Name: " + (result.note.author));
-       $(".notes").append("<p> Comment:" + (result.note.body));
-    }
+  //======== Save Article Button ========//
+  $(".save-article").on("click", function (event) {
+    console.log("save article button is working");
+    var savedArticle = $(this).attr("data-id");
+    console.log(savedArticle);
+    $.ajax({
+      method: "POST",
+      url: "/savedarticles/" + savedArticle
+    }).then(function (data) {
+      // location.reload()
+      if (data.success) {
+        console.log("SUCCESS!")
+      } else {
+        console.log("SAD DAY!")
+      }
+    })
   });
-});
 
-// ============= End On Click Events ================= //
+  // ======== Make Note Button =========//
+  $(".make-note").on("click", function (event) {
+    var makeNote = $(this).attr("data-id");
+    $("#" + makeNote).modal("show");
+    console.log("make note button is working");
+    console.log(makeNote);
+    $.ajax({
+      method: "GET",
+      url: "/articles/" + makeNote
+    }).then(function (data) {
 
-//========= End Document Ready Function =============//
+    })
+  });
+
+  // ============ Submit Note Button ========== //
+  $(".submit-note").on("click", function (event) {
+    // event.preventDefault();
+    console.log("submit comment button is working");
+    var submitNote = $(this).attr("data-id");
+    console.log(submitNote);
+    $.ajax({
+      method: "POST",
+      url: "/articles/" + submitNote,
+      data: {
+        author: $("#name_" + submitNote).val(),
+        body: $("#text_" + submitNote).val()
+      }
+    }).then(function (data) {
+      console.log(data);
+    })
+  });
+
+  // ============ Review Note Button ========== //
+  $(".review-note").on("click", function (event) {
+    event.preventDefault();
+    $(".review-modal").modal("show");
+    console.log("review note button is working");
+    var reviewNote = $(this).attr("data-id");
+    console.log(reviewNote);
+    $.ajax({
+      method: "GET",
+      url: "/note/:id" + reviewNote
+    }).then(function (data) {
+
+    })
+  });
+
+  // ============= Delete Saved Article Button ========= //
+  $(".delete-article").on("click", function (event) {
+    console.log("delete article button is working");
+    var deleteArticle = $(this).attr("data-id");
+    $.ajax({
+      method: "POST",
+      url: "/delete/" + deleteArticle
+    }).done(function (data) {
+      window.location = "/savedarticles"
+    })
+  });
+
+  // ============= End On Click Events ================= //
+
+  //========= End Document Ready Function =============//
 });

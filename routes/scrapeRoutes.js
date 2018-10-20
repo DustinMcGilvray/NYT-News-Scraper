@@ -93,7 +93,7 @@ module.exports = function (app) {
     });
 
     //================ Route for grabbing a specific Article by id, populate it with it's note ============//
-    app.get("/note/:id", function (req, res) {
+    app.get("/articles/:id", function (req, res) {
         // TODO
         // ====
         // Finish the route so it finds one article using the req.params.id,
@@ -112,8 +112,8 @@ module.exports = function (app) {
     });
 
     //================= Route for saving/updating an Article's associated Note =====================//
-    app.post("/note/:id", function (req, res) {
-
+    app.post("/articles/:id", function (req, res) {
+        console.log(req.params.id);
         // save the new note that gets posted to the Notes collection
         // then find an article from the req.params.id
         // and update it's "note" property with the _id of the new note
@@ -130,6 +130,7 @@ module.exports = function (app) {
                 res.json(dbArticle)
             })
             .catch(function (err) {
+                console.log(err);
                 res.json(err);
             });
     });
@@ -158,13 +159,35 @@ module.exports = function (app) {
             })
             .then(function (result) {
                 // res.redirect("/savedarticles")
-                res.json({success: true})
+                res.json({
+                    success: true
+                })
             })
             .catch(function (err) {
                 res.json(err);
             });
     });
 
+    //================ Route for Deleting Articles from Saved Articles Page ==================//
+    app.post("/deletearticle/:id", function (req, res) {
+        // Use the article id to find and update its saved boolean
+        db.Article.findOneAndUpdate({
+                "_id": req.params.id
+            }, {
+                "saved": false,
+                "notes": []
+            })
+            // Execute the above query
+            .exec(function (err, doc) {
+                // Log any errors
+                if (err) {
+                    console.log(err);
+                } else {
+                    // Or send the document to the browser
+                    res.send(doc);
+                }
+            });
+    });
 
 
 

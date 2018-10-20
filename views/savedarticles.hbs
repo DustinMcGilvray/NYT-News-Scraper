@@ -41,7 +41,7 @@
                                         <i class="file alternate outline icon"></i>
                                     </div>
                                 </div>
-                                <div data-id={{this._id}} class="ui red animated fade button" tabindex="0">
+                                <div data-id={{this._id}} class="ui red animated fade button delete-article" tabindex="0">
                                     <div class="hidden content">Delete Article</div>
                                     <div class="visible content">
                                         <i class="trash alternate outline icon"></i>
@@ -67,7 +67,7 @@
 
     <!--Make Note Modal -->
     {{#each savedArticles}}
-    <div class="ui basic modal note-modal">
+    <div id={{_id}} class="ui basic modal note-modal">
         <div class="ui icon header">
             <i class="sticky note icon"></i>
             Make a Note
@@ -83,7 +83,7 @@
                         <label>Short Text</label>
                         <textarea id="text_{{this._id }}" rows="5"></textarea>
                     </div>
-                    <button data-id={{this._id }} class="submitComment ui button" type="submit">Submit Comment</button>
+                    <button data-id={{this._id }} class="ui button submit-note" type="submit">Submit Comment</button>
                 </form>
             </div>
         </div>
