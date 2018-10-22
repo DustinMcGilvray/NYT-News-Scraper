@@ -103,7 +103,8 @@ module.exports = function (app) {
             })
             .populate("note")
             .then(function (dbArticle) {
-                res.json(dbArticle);
+                res.render("savedArticles", 
+                saved:dbArticle});
             })
             .catch(function (err) {
                 res.json(err);
